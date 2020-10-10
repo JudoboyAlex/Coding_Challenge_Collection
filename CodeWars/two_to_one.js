@@ -7,6 +7,9 @@ longest(a, b) -> "abcdefklmopqwxy"
 function longest(s1, s2) {
     let combinedString = s1 + s2;
     return combinedString.split("").sort().filter((item, pos, self) => {
+        console.log(item)
+        console.log(pos)
+        console.log(self)
       return self.indexOf(item) == pos;
       }).join('');
   }
@@ -14,7 +17,7 @@ function longest(s1, s2) {
 // Better Solution#1
 const longest = (s1, s2) => [...new Set(s1+s2)].sort().join('')
 
-// Other Solution#2
+// // Other Solution#2
 function longest(s1, s2) {
     // your code
     s3 = s1 + s2;
@@ -24,3 +27,5 @@ function longest(s1, s2) {
     });
     return s4.join("");
   }
+
+console.log(longest("abcd", "acddefg"))
