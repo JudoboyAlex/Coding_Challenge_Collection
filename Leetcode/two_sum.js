@@ -19,13 +19,17 @@ var twoSum = function (nums, target) {
 
 // Best Solution
 // O(n) - One-pass Hash Table
-var twoSum = function(nums, target) {
-  let map = new Map;
-  for (var i = 0; i < nums.length; i++) {
-      let complement = target - nums[i];
-      if (map.has(complement)) {
-          return [map.get(complement), i]
-      }
+let twoSum = (nums, target) => {
+  let map = new Map();
+  for(let i=0;i<nums.length; i++){
+      if(map.has(target - nums[i])){
+          return [map.get(target-nums[i]), i];
+      } 
       map.set(nums[i], i);
   }
-}
+  return [];
+};
+
+
+
+console.log(twoSum([3,5,-4,8,11,1,-1,6], 10))
