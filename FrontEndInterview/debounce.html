@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debounce</title>
+  </head>
+  <body>
+    <h1>Debounce Example</h1>
+    <input type="text" onkeyup="betterFunction()" />
+    <script>
+      // Debouncing in Javascript
+      let counter = 0;
+      const getData = () => {
+        // calls an API and gets Data
+        console.log("Fetching Data ..", counter++);
+      };
+
+      const debounce = function (fn, d) {
+        let timer;
+        return function () {
+          let context = this,
+            args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            //Need to invoke function
+            //Either getData.apply or fn() works
+            
+            // getData.apply(context, arguments);
+            fn();
+          }, d);
+        };
+      };
+
+      const betterFunction = debounce(getData, 3000);
+    </script>
+  </body>
+</html>
