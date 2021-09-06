@@ -7,6 +7,7 @@
     <title>Throttle</title>
   </head>
   <body>
+    <!-- https://codepen.io/akshaymarch7/pen/pXgxGo -->
     <script>
       const loggerFunc = () => {
         console.count("Throttled Function");
@@ -16,7 +17,7 @@
         let flag = true;
         return function () {
           let context = this;
-          let args = arguments;
+          let args = arguments; 
           if (flag) {
             fn.apply(context, args);
             // fn() 

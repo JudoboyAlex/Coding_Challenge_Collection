@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Frontend Question: Change the background color of the kth to last sibling
+element. Because we are trying to emulate a linked list, we will impose the
+constraint that we only have access to the nextElementSibling method of each
+node (along with inline styling). -->
+<!-- https://codepen.io/EdScissorhands/pen/RJagZw -->
+<style>
+  .wrapper {
+  display: flex;
+  height: 50px;
+  line-height: 50px;
+}
+
+.link {
+  width: 50px;
+  text-align: center;
+  border-radius: 10px;
+  border: solid black thin;
+}
+</style>
+<div class='wrapper'>
+  <div class='link'>0</div>⟹
+  <div class='link'>1</div>⟹
+  <div class='link'>2</div>⟹
+  <div class='link'>3</div>⟹
+  <div class='link'>4</div>⟹
+  <div class='link'>5</div>⟹
+  <div class='link'>6</div>⟹
+  <div class='link'>7</div>⟹
+  <div class='link'>8</div>⟹
+  <div class='link'>9</div>
+</div>
+<script>
+  const turnKthFromLastRed = (head, k) => {
+  let leader = head;
+  let follower = head;
+
+  while (leader.nextElementSibling) {
+    if (k > 1) {
+      k--;
+    } else {
+      follower = follower.nextElementSibling;
+    }
+
+    leader = leader.nextElementSibling;
+  }
+
+  if (k === 1) {
+    follower.style.background = 'red';
+  }
+}
+
+const head = document.querySelector('.link');
+turnKthFromLastRed(head, 3);
+</script>
+  </body>
+</html>
