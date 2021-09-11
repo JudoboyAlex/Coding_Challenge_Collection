@@ -39,3 +39,9 @@ head.print_list();
 result = reverse(head);
 process.stdout.write('Nodes of reversed LinkedList are: ');
 result.print_list();
+
+// Time complexity ##
+// The time complexity of our algorithm will be O(N) where ‘N’ is the total number of nodes in the LinkedList.
+
+// Space complexity ##
+// We only used constant space, therefore, the space complexity of our algorithm is O(1).
