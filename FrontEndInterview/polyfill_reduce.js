@@ -21,3 +21,22 @@ const users = [
 
 const sumOfAges = users.reduce((sum, user) => sum + user.age, 0);
 console.log(sumOfAges); //63
+
+Array.prototype.newReduce = function (callback, startingValue) {
+  // as starting value is an optional param
+  // make a check
+  let accumulator = startingValue || undefined;
+  for (let index = 0; index < this.length; index++) {
+    if (accumulator) {
+      accumulator = callback.call(accumulator, accumulator, this[index], index, this)
+    } else {
+      accumulator = this[index]
+    }
+  }
+  return accumulator;
+}
+
+let values2 = [3,3,4]
+let result = values2.newReduce((a,b) => a + b, 3);
+
+console.log(result); // 15
