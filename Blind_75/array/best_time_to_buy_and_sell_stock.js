@@ -15,6 +15,6 @@ console.log(maxProfit([7,1,5,3,6,4]))
 
 // Complexity Analysis
 
-// Time complexity : O(n)O(n). Only a single pass is needed.
+// Time complexity : O(n). Only a single pass is needed.
 
-// Space complexity : O(1)O(1). Only two variables are used.
+// Space complexity : O(1). Only two variables are used.
