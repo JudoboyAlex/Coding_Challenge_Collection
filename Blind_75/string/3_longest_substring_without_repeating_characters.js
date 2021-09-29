@@ -39,7 +39,6 @@ function non_repeat_substring(str) {
     }
     // insert the 'rightChar' into the map
     charIndexMap[rightChar] = windowEnd;
-    console.log("windowStart: " + windowStart);
     // remember the maximum length so far
     maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
     console.log(maxLength);
