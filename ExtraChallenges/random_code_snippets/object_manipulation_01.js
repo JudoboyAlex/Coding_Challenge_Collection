@@ -24,7 +24,6 @@ let answer_object_long = {
 const entriesByKeyLength = Object
   .entries(answer_object)
   .sort(([k1], [k2]) =>{
-    console.log(k2)
     return k1.length - k2.length
   });
 
