@@ -1,5 +1,5 @@
 const developerProfiles = [
-  { skill: "javascript", user: "Chad" },
+  { skill: "javascript", user: "Chad" },  
   { skill: "javascript", user: "Bill" },
   { skill: "javascript", user: "Sue" },
   { skill: "html", user: "Sue HTML" },
