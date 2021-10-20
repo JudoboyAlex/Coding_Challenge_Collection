@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Throttle TechSith Version</title>
+</head>
+<body>
+<button id='myid'>Click</button>
+
+  <script>
+
+    const throttle = (fn, delay) => {
+      let last = 0;
+      return (...args) => {
+        const now = new Date().getTime();
+        if(now - last < delay){
+          return;
+        }
+        last = now;
+        return fn(...args);
+      }
+    }
+
+    document.getElementById('myid').addEventListener('click', throttle(() => {
+      console.log('you clicked me')
+    }, 3000))
+  </script>
+</body>
+</html>
