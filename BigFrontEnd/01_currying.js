@@ -25,7 +25,6 @@ function curry(func) {
       }
     }
   };
-
 }
 // Solution 2
 function curry(fn) {

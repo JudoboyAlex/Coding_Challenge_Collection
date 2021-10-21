@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autocomplete Search</title>
+</head>
+<body>
+  <style>
+    div {
+      text-align: cennter;
+    }
+
+    li{
+      list-style-type: none;
+    }
+  </style>
+  
+<div>
+  <input type='text' name='' id='search' placeholder="Enter Keyword">
+  <ul></ul>
+</div>
+  <script>
+  /* https://www.fwait.com/javascript-challenge-9-autocomplete-search/ for reference */
+
+const fruits = ['Apple', 'Orange', 'Mango', 'Watermelon', 'Kiwi', 'Banana', 'Grapes'];
+
+
+document.getElementById('search').addEventListener('input', (e)=>{
+
+    let fruitsArray = [];
+    
+    if(e.target.value){
+        fruitsArray = fruits.filter(fruit => fruit.toLowerCase().includes(e.target.value));
+        fruitsArray = fruitsArray.map(fruit => `<li>${fruit}</li>`)
+    }
+
+    showFruitsArray(fruitsArray);
+});
+
+let showFruitsArray = (fruitsArray) => {
+    const html = !fruitsArray.length ? '' : fruitsArray.join('');
+    document.querySelector('ul').innerHTML = html;
+}
+  </script>
+</body>
+</html>

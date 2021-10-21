@@ -29,6 +29,7 @@ Array.prototype.newReduce = function (callback, startingValue) {
   for (let index = 0; index < this.length; index++) {
     if (accumulator) {
       accumulator = callback.call(accumulator, accumulator, this[index], index, this)
+      // accumulator = callback(this[index], accumulator) <-- this works too
     } else {
       accumulator = this[index]
     }
