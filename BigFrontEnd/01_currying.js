@@ -36,4 +36,4 @@ function curry(fn) {
 
 // console.log(curriedJoin(1, 2, 3))
 // console.log(curriedJoin(1)(2, 3))
-console.log(curriedJoin(1, 2)(3))
+console.log(curriedJoin(1)(3)(4))
