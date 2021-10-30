@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Fee</title>
+</head>
+<body>
+  <form id="parent">
+    <input type="text" name="foo.bat" />
+    <input type="text" name="foo.bar.baz" />
+    <input type="text" name="fizz" />
+  </form>
+
+  <script>
+    /*
+getValues("parent") should return object like
+
+{
+	"foo": {
+		"bat" : _____, //Actual value of 1st text box
+		"bar" : {
+			"baz" : _____ // Value of 2nd text box
+		}
+	},
+	"fizz" : _____ // Value of 3rd text box
+}*/
+
+// Solution#1
+function getValues(id) {
+	let element = document.querySelector(`#${id}`);
+  let inputs = element.querySelectorAll('input[type="text"]');
+  let obj = {};
+
+  for(let input of inputs) {
+  	let inputValue = input.value;
+  	let names = input.name.split('.');
+		let tmpObject = obj;
+    
+    for (let i = 0; i < names.length; i++) {
+    	 tmpObject[names[i]] = {...tmpObject[names[i]]};
+       if (i === names.length - 1) {
+         tmpObject[names[i]] = inputValue;
+       } else {
+         tmpObject = tmpObject[names[i]];
+       }
+   
+     }
+  }
+
+  return obj;
+}
+
+// Solution#2
+// const elements = document.querySelectorAll( "#parent input[type='text']");
+
+// const result = Array.from(elements).reduce((prev, current) => {
+//   const names = current.name.split(".");
+//   let temp = prev;
+//   names.forEach((name, index) => {
+//     if (!(name in temp)) {
+//       temp[name] = {};
+//     }
+//     if (index == names.length - 1) {
+//       temp[name] = current.value;
+//     }
+//     temp = temp[name];
+//   });
+//   return prev;
+// }, {});
+
+  </script>
+</body>
+</html>
