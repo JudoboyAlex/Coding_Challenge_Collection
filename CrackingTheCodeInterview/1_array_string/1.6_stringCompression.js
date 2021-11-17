@@ -1,3 +1,4 @@
+// 443. String Comprssion leetcode
 var compress = function(chars) {
   if (!chars.length) return 0;
   let j = 0;
@@ -12,7 +13,7 @@ var compress = function(chars) {
         const s = counter.toString();
         for (let k = 0; k < s.length; k++) chars[++j] = s[k];
       }
-      j++;
+      j++;  
       cur = chars[i];
       counter = 1;
     }
