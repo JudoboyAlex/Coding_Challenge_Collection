@@ -144,10 +144,8 @@ class SinglyLinkedList{
     for(let i = 0; i < this.size; i++){
       next = node.next;
       node.next = prev;
-      console.log(node)
       prev = node;
       node = next;
-      console.log(node)
     }
     return this;
   }
@@ -174,6 +172,22 @@ class SinglyLinkedList{
   // Follow up: How would you solve this problem is a temporary buffer is not allowed?
   // a solution that doesn't use O(n) space
   deleteDuplicate_II(){
+    let current = this.head;
+    while(current != null){
+    // Remove all future nodes that have the same value
+      let runner = current;
+      while(runner.next != null){
+        if(runner.next.val === current.val){
+          runner.next = runner.next.next;
+        } else {
+          runner = runner.next;
+        }
+      }
+      current = current.next;
+    }
+  }
+
+  deleteDuplicate_III(){
     var p1;
     var p2;
     var p3;
