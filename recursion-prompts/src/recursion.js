@@ -71,6 +71,10 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  let arr = []
+  if( y - x === 1 ) return 
+  arr.push(range(x+1, y-1))
+  return arr;
 };
 
 // 7. Compute the exponent of a number.
