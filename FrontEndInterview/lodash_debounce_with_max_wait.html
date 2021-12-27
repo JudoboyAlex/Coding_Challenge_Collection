@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Egghead Debounce</title>
+</head>
+<body>
+  <div>
+    <label>username <input id="input-debounced"/></label>
+    <output style="display: block"></output>
+  </div>
+<script>
+  const debouncedInput = document.getElementById("input-debounced")
+  debouncedInput.addEventListener("keyup", debounce(logEvent, 300, {maxWait:2000}));
+
+  function logEvent(e){
+    let lists = document.querySelector('output')
+    lists.innerHTML += 
+      e.target.value + "<br>";
+  }
+
+  function debounce(fn, wait, {maxWait}){
+    let timer, maxTimer;
+    return function(...args){
+      if(timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        clearTimeout(maxTimer);
+        maxTimer=null;
+        fn(...args);
+      }, wait);
+      if(maxWait && !maxTimer){
+        maxTimer = setTimeout(() => {
+          clearTimeout(timer);
+          maxTimer = null;
+          fn(...args);
+        }, maxWait);
+      }
+    };
+  }
+</script> 
+</body>
+</html>
+
+
+
+
+
