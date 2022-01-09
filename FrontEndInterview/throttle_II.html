@@ -11,17 +11,61 @@
 
   <script>
 
-    const throttle = (fn, delay) => {
-      let last = 0;
-      return (...args) => {
-        const now = new Date().getTime();
-        if(now - last < delay){
-          return;
-        }
-        last = now;
-        return fn(...args);
+    // const throttle = (fn, delay) => {
+    //   let last = 0;
+    //   return (...args) => {
+    //     const now = new Date().getTime();
+    //     console.log("now ", now)
+    //     console.log("last ", last)
+    //     if(now - last < delay){
+    //       console.log("returned")
+    //       return;
+    //     }
+    //     last = now;
+    //     return fn(...args);
+    //   }
+    // }
+
+  const throttle = (func, limit) => {
+    let lastFunc
+    let lastRan
+    return function() {
+      const context = this
+      const args = arguments
+      if (!lastRan) {
+        func.apply(context, args)
+        lastRan = Date.now()
+      } else {
+        clearTimeout(lastFunc)
+        lastFunc = setTimeout(function() {
+          if ((Date.now() - lastRan) >= limit) {
+            func.apply(context, args)
+            lastRan = Date.now()
+          }
+        }, limit - (Date.now() - lastRan))
       }
     }
+  }
+//   function throttle(func, wait) {
+//   let waiting = false, lastArgs = null;
+//   return function(...args){
+//     if(!waiting){
+//       func.apply(this, args)
+//       waiting = true;
+//       let timeout = () => setTimeout(() => {
+//         waiting = false;
+//         if(lastArgs){
+//           func.apply(this, lastArgs);
+//           lastArgs = null;
+//         }
+//       }, wait);
+//       timeout();
+//     }
+//     else 
+//       lastArgs = args
+//   }
+// }
+
 
     document.getElementById('myid').addEventListener('click', throttle(() => {
       console.log('you clicked me')
