@@ -1,3 +1,4 @@
+// https://www.reddit.com/r/learnjavascript/comments/sabwlg/merge_array_of_objects_that_have_the_same/
 var Students = [
   {
     ID: 1,

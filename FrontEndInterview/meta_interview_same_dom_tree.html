@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facebook DOM Traversal</title>
+</head>
+<body>
+  <div id="rootA">
+    <div>
+      <div></div>
+    </div>
+    
+    <div></div>
+      
+    
+    <div>
+      <div>
+        <div id="nodeA"></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+    
+  <div id="rootB">
+    <div>
+      <div></div>
+    </div>
+    
+    <div></div>
+    
+    <div>
+      <div>
+        <div id="nodeB"></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    /*
+Given 2 identical DOM tree structures A & B with root nodes rootA and rootB respectively, 
+and a leaf node "n" ( denoted as nodeA ), find the value of a corresponding leaf node "m" ( denoted as nodeB ) 
+in DOM tree B.
+
+
+ A         B
+
+ O        O
+ |\       |\
+ O O      O O
+  /|\      /|\
+ O O O    O O O
+      \        \
+       O (n)     O (m)
+*/
+
+const rootA = document.getElementById('rootA');
+const rootB = document.getElementById('rootB');
+
+const nodeA = document.getElementById('nodeA');
+const nodeB = document.getElementById('nodeB');
+
+function getPath(root, node) {
+  const path = [];
+  
+  while (node !== root) {
+    const parent = node.parentElement;
+    const children = Array.from(parent.children);
+    const nodeIndex = children.indexOf(node);
+    path.push(nodeIndex);
+    node = parent;
+  }
+  
+  return path;
+}
+
+function getNodeFromPath(node, path) {
+  const toWalk = [...path];
+  
+  while (toWalk.length > 0) {
+    node = node.children[toWalk.pop()];
+  }
+  
+  return node;
+}
+
+function getSymmetricNode(rootA, rootB, nodeA) {
+  const pathToNode = getPath(rootA, nodeA);
+  return getNodeFromPath(rootB, pathToNode);
+}
+
+
+const targetNode = getSymmetricNode(rootA, rootB, nodeA);
+
+console.log(nodeB === targetNode);
+
+  </script>
+</body>
+</html>
