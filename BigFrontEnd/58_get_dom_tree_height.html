@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get DOM Tree Height</title>
+</head>
+<body>
+  <script>
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <div>
+        <p>
+          <button>Hello</button>
+        </p>
+      </div>
+      <p>
+        <span>World!</span>
+      </p>`;
+
+console.log(div.children);
+
+// DFS Solution
+// function getHeight(tree) {
+//   let maxHeight = 0;
+  
+//   if (!tree) {
+//     return maxHeight;
+//   }
+    
+//   for (let chid of tree.children) {
+//     maxHeight = Math.max(maxHeight, getHeight(chid)); 
+//   }
+
+//   return maxHeight + 1;
+// }
+
+// BFS Solution
+function getHeight(tree) {
+  if (!tree) {
+    return 0
+  } 
+
+  let depth = 0
+  const queue = [tree, null]
+  console.log(queue[1])
+  while (queue.length) {
+    const node = queue.shift()
+    if (node) {
+      queue.push(...node.children)
+    } else if (queue.length) {
+      queue.push(null)
+      depth++
+    }
+  }
+
+  return depth + 1
+}
+console.log(getHeight(div))
+  </script>
+  
+</body>
+</html>
