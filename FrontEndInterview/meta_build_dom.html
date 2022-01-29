@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta Build DOM</title>
+</head>
+<body>
+
+  <script>
+    const dom = {
+    type: 'div',
+    props: {
+        id: 'hello',
+        children: [
+            {
+                type: 'h1',
+                props: {
+                    children: 'HELLO'
+                }
+            }
+        ]
+    },
+}
+
+function buildDOM(dom) {
+    if (dom === null) {
+        return null;
+    }
+    
+    // build parent node
+    const parentNode = document.createElement(dom.type);
+    if (dom.props.hasOwnProperty('id')) {
+        parentNode.id = dom.props.id;
+    }
+    
+    // build children elements
+    if (Array.isArray(dom.props.children)) {
+        for (let i = 0; i < dom.props.children.length; ++i) {
+            parentNode.appendChild(buildDOM(dom.props.children[i]));
+        }
+    }
+    else {
+        parentNode.appendChild(document.createTextNode(dom.props.children));
+    }
+
+    return parentNode;
+}
+console.log(buildDOM(dom))
+  </script>
+  
+</body>
+</html>
