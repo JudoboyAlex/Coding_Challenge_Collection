@@ -61,3 +61,21 @@ console.log(non_repeat_substring("abcefabcbb"))
 // since we can expect a fixed set of characters in the input string (e.g., 26 for English letters), 
 // we can say that the algorithm runs in fixed space O(1); in this case, 
 // we can use a fixed-size array instead of the HashMap.
+
+// My while loop solution
+var lengthOfLongestSubstring = function (s) {
+  let seen = new Map();
+  let left = 0;
+  let right = 0;
+  let max = 0;
+
+  while (right < s.length) {
+    if (seen.has(s[right])) {
+      left = Math.max(left, seen.get(s[right]) + 1);
+    }
+    seen.set(s[right], right);
+    max = Math.max(max, right - left + 1);
+    right++;
+  }
+  return max;
+};

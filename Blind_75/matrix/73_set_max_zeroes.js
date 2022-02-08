@@ -30,6 +30,32 @@ var setZeroes = function (matrix) {
   return matrix;
 };
 
+// Simplest Solution
+var setZeroes = function (matrix) {
+  let rowZeroes = new Set();
+  let colZeroes = new Set();
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      if (matrix[i][j] === 0) {
+        rowZeroes.add(i);
+        colZeroes.add(j);
+      }
+    }
+  }
+
+  for (let row of rowZeroes) {
+    for (let i = 0; i < matrix[0].length; i++) {
+      matrix[row][i] = 0;
+    }
+  }
+
+  for (let col of colZeroes) {
+    for (let j = 0; j < matrix.length; j++) {
+      matrix[j][col] = 0;
+    }
+  }
+};
 console.log(
   setZeroes([
     [1, 1, 1],
