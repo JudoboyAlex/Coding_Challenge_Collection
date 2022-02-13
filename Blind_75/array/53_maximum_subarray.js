@@ -23,3 +23,18 @@ var maxSubArray = function(nums) {
   }
   return Math.max(...nums);
 };
+
+// Easy to understand solution
+var maxSubArray = function (nums) {
+  let max = nums[0];
+  let current = 0;
+
+  for (let num of nums) {
+    current = Math.max(num, current + num);
+    max = Math.max(max, current);
+  }
+
+  return max;
+};
+
+// Time: O(n), Space: O(1)
