@@ -39,3 +39,21 @@ const maxProduct = (nums) => {
 
 console.log(maxProduct([2,3,-2,4])) // 6
 console.log(maxProduct([-2,3,-4])) // 24
+
+
+// Easier to understand solution
+var maxProduct = function (nums) {
+  let max = nums[0];
+  let currMax = 1;
+  let currMin = 1;
+  let prevMax = 1;
+
+  for (let num of nums) {
+    prevMax = currMax * num;
+    currMax = Math.max(prevMax, currMin * num, num);
+    currMin = Math.min(prevMax, currMin * num, num);
+    max = Math.max(max, currMax);
+  }
+
+  return max;
+};
