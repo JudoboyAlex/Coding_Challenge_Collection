@@ -69,3 +69,59 @@ requires N/2 operations as well. In total, that results in O(N) time complexity.
 
 Space complexity: O(1), since we do not allocate any additional data structures.
 */
+
+// Easier to understand solution
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {void} Do not return anything, modify head in-place instead.
+ */
+var reorderList = function(head) {
+    
+    if (!head || !head.next) return; 
+    
+    // find the middle point
+    let slow = head;
+    let fast = head;
+    
+    while(fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    // return slow;
+
+    // reverse linked list
+    let prev = null; 
+    let cur = slow; 
+    let next;
+    
+    while(cur) {
+        next = cur.next;
+        cur.next = prev;
+        prev = cur;
+        cur = next;
+    }
+    //return prev;
+    
+    // merge two sorted lists
+    let first = head;
+    let second = prev;
+    
+    while(second.next != null){
+        next = first.next;
+        first.next = second;
+        first = next;
+        
+        next = second.next;
+        second.next = first;
+        second = next;
+    }
+    
+    // return head;
+};

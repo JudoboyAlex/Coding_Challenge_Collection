@@ -41,3 +41,21 @@ function longestConsecutive(nums) {
 
   return max;
 }
+
+// Easy to understand solution- O(n)
+var longestConsecutive = function (nums) {
+  let set = new Set(nums);
+  let count;
+  let max = 0;
+
+  for (let num of nums) {
+    if (!set.has(num - 1)) {
+      count = 0;
+      while (set.has(num++)) {
+        count++;
+      }
+      max = Math.max(max, count);
+    }
+  }
+  return max;
+};

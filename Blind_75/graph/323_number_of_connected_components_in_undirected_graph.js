@@ -43,3 +43,42 @@ const dfs = (index, graph, visited) => {
       }
   }
 }
+
+// Easier to understand solution
+var countComponents = function (n, edges) {
+  let adjList = {};
+  let count = 0;
+  let visited = {};
+
+  for (let i = 0; i < n; i++) {
+    adjList[i] = [];
+  }
+
+  for (edge of edges) {
+    let [a, b] = edge;
+    adjList[a].push(b);
+    adjList[b].push(a);
+  }
+
+  for (let node in adjList) {
+    if (dfs(adjList, node, visited) === true) {
+      count += 1;
+    }
+  }
+  return count;
+};
+
+const dfs = (adjList, current, visited) => {
+  if (visited[current]) return false;
+
+  visited[current] = true;
+
+  for (let neighbor of adjList[current]) {
+    dfs(adjList, neighbor, visited);
+  }
+
+  return true;
+};
+
+// Time complexity: O(E+V)
+// Space complexity: O(E+V)

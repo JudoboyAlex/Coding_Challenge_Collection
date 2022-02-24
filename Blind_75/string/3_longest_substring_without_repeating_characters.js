@@ -79,3 +79,23 @@ var lengthOfLongestSubstring = function (s) {
   }
   return max;
 };
+
+// easier to understand solution
+// Use char in hash not hash[char] as hash[char] return false when value is 0
+var lengthOfLongestSubstring = function (s) {
+  let max = 0;
+  let left = 0;
+  let right = 0;
+  let hash = {};
+
+  while (right < s.length) {
+    let char = s[right];
+    if (char in hash) {
+      left = Math.max(left, hash[char] + 1);
+    }
+    hash[char] = right;
+    max = Math.max(max, right - left + 1);
+    right++;
+  }
+  return max;
+};

@@ -27,3 +27,5 @@ const characterReplacement = (s, k) => {
 };
 
 console.log(characterReplacement("AABABBA",1));
+
+// Time: O(n), Space: O(1)
