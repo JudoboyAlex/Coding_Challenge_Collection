@@ -1,0 +1,54 @@
+// leetcode solution
+var minSubArrayLen = function (target, nums) {
+  let left = 0;
+  let right = 0;
+  let sum = 0;
+  let result = 0;
+
+  while (right < nums.length) {
+    sum += nums[right];
+
+    while (sum >= target) {
+      let minLength = right - left + 1;
+      if (result === 0 || minLength < result) result = minLength;
+      sum -= nums[left];
+      left++;
+    }
+    right++;
+  }
+  return result;
+};
+
+// Time: O(n), Space: O(1)
+
+// grokking solution
+function smallest_subarray_sum(s, arr) {
+  let windowSum = 0,
+    minLength = Infinity,
+    windowStart = 0;
+
+  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    windowSum += arr[windowEnd]; // add the next element
+    // shrink the window as small as possible until the 'window_sum' is smaller than 's'
+    while (windowSum >= s) {
+      minLength = Math.min(minLength, windowEnd - windowStart + 1);
+      windowSum -= arr[windowStart];
+      windowStart += 1;
+    }
+  }
+
+  if (minLength === Infinity) {
+    return 0;
+  }
+  return minLength;
+}
+
+console.log(
+  `Smallest subarray length: ${smallest_subarray_sum(7, [2, 1, 5, 2, 3, 2])}`
+);
+console.log(
+  `Smallest subarray length: ${smallest_subarray_sum(7, [2, 1, 5, 2, 8])}`
+);
+console.log(
+  `Smallest subarray length: ${smallest_subarray_sum(8, [3, 4, 1, 1, 6])}`
+);
