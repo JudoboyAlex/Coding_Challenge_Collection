@@ -12,3 +12,32 @@ function waitForAll(promises) {
 
   return arrayPromise;
 }
+
+// Youtube Roadside Coder solution from 02/13/22 video
+function myPromiseAll(promises){
+  let result = [];
+  return new Promise((resolve, reject) => {
+    promises.forEach((p, index) => {
+      p.then((output) => {
+        result.push(output);
+        if(index === promises.length - 1){
+          resolve(result)
+        }
+      }).catch((err) => reject(err));
+    });
+  });
+}
+
+function showText(text, time){
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(text);
+    }, time);
+  });
+}
+
+myPromiseAll([
+  showText('hello', 1000),
+  Promise.resolve('hi'),
+  Promise.reject('bye')
+]).then((value) => console.log(value));
