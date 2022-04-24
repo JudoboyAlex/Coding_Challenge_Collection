@@ -13,7 +13,8 @@ function firstBadVersion(isBad) {
         start = mid + 1;
       }
     }
-    return start <=version ? start : -1;
+    return start <= version ? start : -1;
   }
 }
 
+// Time: O(log(N))
