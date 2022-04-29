@@ -36,6 +36,6 @@ const plus = (y) => (x) => x + y;
 const subtract = (y) => (x) => x - y;
 const divide = (y) => (x) => x / y;
 
-//const pipe = (fns) => (x) => fns.reduce((y, fn) => fn(y), x);
+const pipe = (fns) => (args) => fns.reduce((accu, fn) => fn(accu), args);
 
 console.log(pipe([times(2), plus(3), times(4)])(2));
