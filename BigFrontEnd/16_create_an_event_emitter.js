@@ -51,3 +51,57 @@ const handleMyEvent = (data) => {
  let myRelease = myEventEmitter.subscribe('testEvent', handleMyEvent_two);
  myRelease.release()
  myEventEmitter.emit('testEvent', 'hi', "hello");
+
+ // Solution #2 easier to understand solution similar to Grider solution
+ // https://www.youtube.com/watch?v=X-AhceP6jpA
+ class EventEmitter {
+   constructor() {
+     this.listeners = {};
+   }
+   subscribe(eventName, callback) {
+     // maintain an array of cb for every event.
+     if (this.listeners[eventName]) {
+       this.listeners[eventName].push(callback);
+     } else {
+       this.listeners[eventName] = [callback];
+     }
+     // bind the retuned object release with current eventName
+     return {
+       release: () => this.release(eventName, callback),
+     };
+   }
+
+   release(eventName, callback) {
+     // find the index of cb in listeners array for that event and remove it.
+     const cbIndex = this.listeners[eventName]?.findIndex(
+       (attachedCb) => attachedCb === callback
+     );
+     this.listeners[eventName]?.splice(cbIndex, 1);
+   }
+
+   emit(eventName, ...args) {
+     // call all the cb for a particular event from listener array.
+     if (this.listeners[eventName]) {
+       this.listeners[eventName].forEach((cb) => {
+         cb(...args);
+       });
+     }
+   }
+ }
+
+ // for catching error, use for loop
+ /*
+    emit(eventName, ...args) {
+     // call all the cb for a particular event from listener array.
+     if (this.listeners[eventName]) {
+       for(let cb of this.listeners[eventName]) {
+          try {
+            cb(...args)
+          } catch(e){
+            throw e;
+          }
+       }
+     }
+   }
+
+ */
