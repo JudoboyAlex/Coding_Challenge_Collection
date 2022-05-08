@@ -1,3 +1,18 @@
+const originalSetTimeout = window.setTimeout;
+let timeoutIds = [];
+
+window.setTimeout = (callback, delay) => {
+  const timerId = originalSetTimeout(callback, delay);
+  timeoutIds.push(timerId);
+  return timerId;
+};
+
+const clearAllTimeout = () => {
+  timeoutIds.forEach((id) => window.clearTimeout(id));
+};
+
+
+// Alternative, but not good solution
 function clearAllTimeout() {
   // your code here
   let id = setTimeout(null, 0);
