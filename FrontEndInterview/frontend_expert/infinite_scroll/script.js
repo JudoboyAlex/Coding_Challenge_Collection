@@ -14,7 +14,7 @@ function handleScroll() {
   if (!canFetchTestimonials) return;
   const bottomSpaceLeftToScroll =
     this.scrollHeight - this.scrollTop - this.clientHeight;
-  if (bottomSpaceLeftToScroll > 0) return;
+  if (bottomSpaceLeftToScroll > 0.5) return;
   fetchAndAppendTestimonials();
 }
 
