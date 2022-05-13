@@ -22,3 +22,14 @@ function myQuerySelector(selector){
 
 // USAGE:
 const firstRow = myQuerySelector('.container .row:first-child')
+
+function walkPreOrder(node) {
+  if (!node) return;
+
+  // do something here
+  console.log(node);
+
+  for (let child of node.children) {
+    walkPreOrder(child);
+  }
+}el
