@@ -1,5 +1,5 @@
 const API_BASE_URL = "https://algoexpert.io/api/testimonials";
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 8; // depends on monitor size, this number needs to increase
 
 let canFetchTestimonials = true;
 let afterID = null;
