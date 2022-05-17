@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
+#wrapper {
+  width: 400px;
+  margin: 24px auto;
+}
+
+#typeahead {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #828080;
+  font-size: 18px;
+  outline: none;
+}
+
+#suggestions-list {
+  width: 100%;
+  padding: 0;
+  border-radius: 8px;
+  margin-top: 8px;
+  box-shadow: 0 5px 10px #4a494933;
+  list-style-type: none;
+  max-height: 200px;
+  overflow: auto;
+}
+
+li {
+  padding: 12px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+li:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+li:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+li:not(.selected, :hover):nth-child(even) {
+  background-color: #e7e7e7;
+}
+
+li:not(.selected, :hover):nth-child(odd) {
+  background-color: white;
+}
+
+li:hover, .selected {
+  background-color: #7ba5f6;
+}
