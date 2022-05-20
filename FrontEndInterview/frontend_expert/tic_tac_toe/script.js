@@ -46,6 +46,7 @@ function makeMove(gameSquare) {
 }
 
 function didPlayerWin() {
+  console.log(gameSquares);
   const relevantText = currentPlayer === 1 ? "X" : "O";
   return WIN_CONDITIONS.some((condition) => {
     return condition.every((gameSquarePosition) => {
