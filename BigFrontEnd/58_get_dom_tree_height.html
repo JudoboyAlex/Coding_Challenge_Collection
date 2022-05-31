@@ -22,19 +22,19 @@
 console.log(div);
 
 // DFS Solution
-// function getHeight(tree) {
-//   let maxHeight = 0;
+function getHeightDFS(tree) {
+  let maxHeight = 0;
   
-//   if (!tree) {
-//     return maxHeight;
-//   }
+  if (!tree) {
+    return maxHeight;
+  }
     
-//   for (let chid of tree.children) {
-//     maxHeight = Math.max(maxHeight, getHeight(chid)); 
-//   }
+  for (let chid of tree.children) {
+    maxHeight = Math.max(maxHeight, getHeightDFS(chid)); 
+  }
 
-//   return maxHeight + 1;
-// }
+  return maxHeight + 1;
+}
 
 // BFS Solution
 function getHeightBFS(tree) {
@@ -44,7 +44,7 @@ function getHeightBFS(tree) {
 
   let depth = 0
   const queue = [tree, null]
-  console.log(queue[1])
+
   while (queue.length) {
     const node = queue.shift()
     if (node) {
@@ -58,10 +58,10 @@ function getHeightBFS(tree) {
   return depth + 1
 }
 
-function getHeightDFS(tree){
-  if(!tree) return 0;
-  return 1 + getHeightDFS(...tree.children)
-}
+// function getHeightDFS(tree){
+//   if(!tree) return 0;
+//   return 1 + getHeightDFS(...tree.children)
+// }
 console.log(getHeightBFS(div))
 console.log(getHeightDFS(div))
   </script>

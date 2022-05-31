@@ -25,27 +25,53 @@
     //     return fn(...args);
     //   }
     // }
+  
+  // const throttle = (func, limit) => {
+  //   let lastFunc
+  //   let lastRan
+  //   return function() {
+  //     const context = this
+  //     const args = arguments
+  //     if (!lastRan) {
+  //       func.apply(context, args)
+  //       lastRan = Date.now()
+  //     } else {
+  //       clearTimeout(lastFunc)
+  //       lastFunc = setTimeout(function() {
+  //         if ((Date.now() - lastRan) >= limit) {
+  //           func.apply(context, args)
+  //           lastRan = Date.now()
+  //         }
+  //       }, limit - (Date.now() - lastRan))
+  //     }
+  //   }
+  // }
 
-  const throttle = (func, limit) => {
-    let lastFunc
-    let lastRan
-    return function() {
-      const context = this
-      const args = arguments
-      if (!lastRan) {
-        func.apply(context, args)
-        lastRan = Date.now()
-      } else {
-        clearTimeout(lastFunc)
-        lastFunc = setTimeout(function() {
-          if ((Date.now() - lastRan) >= limit) {
-            func.apply(context, args)
-            lastRan = Date.now()
-          }
-        }, limit - (Date.now() - lastRan))
-      }
+  // BFE version  
+  function throttle(func, wait) {
+  let cooling = false;
+  let lastArg;
+  return function(...args) {
+    if (cooling) {
+      // we need to store the last args because when time's up,
+      // cooling flag is still false, and we don't want miss this last args
+      console.log(args)
+      lastArg = args;
+    } else {
+      func.apply(this, args); //initial run
+      cooling = true;
+      setTimeout(() => {
+        //when wait time's up
+        cooling = false;
+        console.log("yo")
+        if (lastArg) {
+          //if there's any run left, run it
+          func.apply(this, lastArg);
+        }
+      }, wait);
     }
-  }
+  };
+}
 //   function throttle(func, wait) {
 //   let waiting = false, lastArgs = null;
 //   return function(...args){
