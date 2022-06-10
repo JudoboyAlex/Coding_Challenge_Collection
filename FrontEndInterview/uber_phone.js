@@ -52,3 +52,50 @@ function mapLimit(inputs, limit, iterateeFn, callback) {
 mapLimit([1, 2, 3, 4, 5], 2, getNameById, (allResults) => {
   console.log("output:", allResults); // ["User1", "User2", "User3", "User4", "User5"]
 });
+
+// Solution #2
+function getNameById(id, callback) {
+  // simulating async request
+  const randomRequestTime = Math.floor(Math.random() * 100) + 200;
+
+  setTimeout(() => {
+    callback("User" + id);
+  }, randomRequestTime);
+}
+
+function transformInput(input, iterateeFn) {
+  return new Promise((resolve) => {
+    iterateeFn(input, (str) => {
+      resolve(str);
+    });
+  });
+}
+
+function mapLimit(inputs, limit, iterateeFn, callback) {
+  // implement here
+  let started = 0;
+  let output = [];
+  let currIndex = 0;
+
+  async function enqueue() {
+    if (currIndex < inputs.length) {
+      started++;
+      const result = await transformInput(inputs[currIndex++], iterateeFn);
+      output.push(result);
+      if (output.length === inputs.length) {
+        callback(output);
+      } else {
+        enqueue();
+      }
+    }
+  }
+
+  // Intial run
+  while (started < limit && currIndex < inputs.length) {
+    enqueue();
+  }
+}
+
+mapLimit([1, 2, 3, 4, 5], 2, getNameById, (allResults) => {
+  console.log("output:", allResults); // ["User1", "User2", "User3", "User4", "User5"]
+});
