@@ -5,6 +5,7 @@
 //      input: The input being processed.
 //      callback: A function that will be called when the input is finished processing. It will be provided one argument, the processed output.
 // callback: A function that should be called with the array of outputs once all the inputs have been processed.
+// https://leetcode.com/discuss/interview-experience/2074287/Uber-FrontEnd-Phone-Screen
 
 function getNameById(id, callback) {
   // simulating async request
