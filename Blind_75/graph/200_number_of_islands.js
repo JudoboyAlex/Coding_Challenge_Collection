@@ -44,7 +44,7 @@ function explore(row, col, grid){
 
 /*Complexity Analysis
 
-Time complexity : O(M \times N)O(M×N) where MM is the number of rows and NN is the number of columns.
+Time complexity : O(M \times N)O(M×N) where M is the number of rows and N is the number of columns.
 
 Space complexity : worst case O(M \times N)O(M×N) in case that the grid map is filled with lands 
 where DFS goes by M \times NM×N deep.*/
