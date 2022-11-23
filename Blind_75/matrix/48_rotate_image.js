@@ -1,3 +1,4 @@
+// Solution#1
 // The time complexity is O(M), where M is the size of the matrix (total of all cells). 
 // The space complexity is O(1) because the variables don't grow as M becomes larger.
 let matrix = [[1,2,3],[4,5,6],[7,8,9]]
@@ -9,6 +10,7 @@ const rotate = function(matrix){
   return matrix
 }
 
+// Solution#2
 // Easier to understand solution
 var rotate = function (matrix) {
   for (let i = 0; i < matrix.length; i++) {
