@@ -12,7 +12,7 @@ const rotate = function(matrix){
 
 // Solution#2
 // Easier to understand solution
-var rotate = function (matrix) {
+const rotate2 = function (matrix) {
   for (let i = 0; i < matrix.length; i++) {
     for (let j = i + 1; j < matrix[i].length; j++) {
       // let temp = matrix[i][j]

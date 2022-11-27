@@ -11,7 +11,7 @@ function isAnagram(s, t) {
     
    // return s.toLowerCase().split("").sort().join("") === t.toLowerCase().split("").sort().join("")
 }
-
+// Time O(n), Space O(1)
 
 // Runtime: 72 ms, faster than 99.55% of JavaScript online submissions for Valid Anagram.
 // Memory Usage: 42 MB, less than 37.68% of JavaScript online submissions for Valid Anagram.

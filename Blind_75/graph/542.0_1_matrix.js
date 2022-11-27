@@ -67,3 +67,41 @@ var updateMatrix = function (matrix) {
   }
   return matrix;
 };
+
+// Solution#2 BFS
+var updateMatrix = function (mat) {
+  const m = mat.length;
+  const n = mat[0].length;
+  const result = Array(m)
+    .fill()
+    .map(() => Array(n).fill());
+  const queue = [];
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (mat[i][j] === 0) {
+        result[i][j] = 0;
+        queue.push([i, j]);
+      }
+    }
+  }
+  while (queue.length) {
+    const [x, y] = queue.shift();
+    if (x - 1 >= 0 && result[x - 1][y] === undefined) {
+      queue.push([x - 1, y]);
+      result[x - 1][y] = result[x][y] + 1;
+    } // up
+    if (y - 1 >= 0 && result[x][y - 1] === undefined) {
+      queue.push([x, y - 1]);
+      result[x][y - 1] = result[x][y] + 1;
+    } // left
+    if (x + 1 < m && result[x + 1][y] === undefined) {
+      queue.push([x + 1, y]);
+      result[x + 1][y] = result[x][y] + 1;
+    } // down
+    if (y + 1 < n && result[x][y + 1] === undefined) {
+      queue.push([x, y + 1]);
+      result[x][y + 1] = result[x][y] + 1;
+    } // right
+  }
+  return result;
+};
