@@ -22,7 +22,7 @@ var diameterOfBinaryTree = function (root) {
 /*
 Complexity Analysis
 
-Let NN be the number of nodes in the tree.
+Let N be the number of nodes in the tree.
 
 Time complexity: O(N). This is because in our recursion function longestPath, we only enter and exit from each node once. We know this because each node is entered from its parent, and in a tree, nodes only have one parent.
 

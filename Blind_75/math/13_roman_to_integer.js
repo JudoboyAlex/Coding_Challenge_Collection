@@ -3,12 +3,20 @@ Runtime: 288 ms, faster than 5.93% of JavaScript online submissions for Roman to
 Memory Usage: 50.6 MB, less than 5.16% of JavaScript online submissions for Roman to Integer.
 */
 
-const romanToInt = s => {
+const romanToInt = (s) => {
   if (!s || s.length === 0) {
     return 0;
   }
 
-  const map = new Map([['I', 1], ['V', 5], ['X', 10], ['L', 50], ['C', 100], ['D', 500], ['M', 1000]])
+  const map = new Map([
+    ["I", 1],
+    ["V", 5],
+    ["X", 10],
+    ["L", 50],
+    ["C", 100],
+    ["D", 500],
+    ["M", 1000],
+  ]);
   let i = s.length - 1;
   let result = map.get(s[i]);
 
@@ -28,11 +36,11 @@ const romanToInt = s => {
   return result;
 };
 
-console.log(romanToInt('III'))
+console.log(romanToInt("III"));
 
 // Time: O(1), Space: O(1)
 
-var romanToInt = function (s) {
+var romanToInt2 = function (s) {
   const map = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
   let num = 0;
 
