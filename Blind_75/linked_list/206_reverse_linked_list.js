@@ -180,3 +180,27 @@ list.reverseLinkedList()
 // console.log(list)
 // list.insertAtEnd("Yang")
 // console.log(list.head.next)
+
+//Iterative Solution
+var reverseList = function (head) {
+  let cur = head;
+  let prev = null;
+  let next = null;
+
+  while (cur) {
+    next = cur.next;
+    cur.next = prev;
+    prev = cur;
+    cur = next;
+  }
+
+  return prev;
+};
+
+/*
+Complexity analysis
+
+Time complexity : O(n). Assume that nn is the list's length, the time complexity is O(n).
+
+Space complexity : O(1).
+*/
