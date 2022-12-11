@@ -29,3 +29,27 @@ Time complexity : O(n^3). For every starting index, the search can continue till
 
 Space complexity : O(n). Queue of at most nnn size is needed.
 */
+
+// BFS Solution#2
+var wordBreak2   = function (s, wordDict) {
+  const words = new Set(wordDict);
+  const wordLens = new Set(wordDict.map((word) => word.length));
+  const starts = new Set([0]);
+  for (let start of starts) {
+    // this dynamically increases with every .add from the latter for loop
+    // meaning, you could have differing starts, as a result of cutting down the string with the words u matched
+    for (let len of wordLens) {
+      // for every unique length of words
+      // you literally try all of the lengths
+      // so this deals with partial permutations
+      // as well as duplicates like aa, aaaaa
+      if (words.has(s.slice(start, start + len))) {
+        // do we have a word in our dictionary matching that length of words?
+        starts.add(start + len);
+        // if so , add the remaining of the string so u can try starting from there instead
+        // now u can attempt to try starting from this new location
+      }
+    }
+  }
+  return starts.has(s.length); // so long as the set has your length, it means that you managed to find a perfect match
+};

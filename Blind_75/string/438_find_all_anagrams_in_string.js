@@ -76,3 +76,7 @@ var findAnagrams2 = function(s, p) {
     }
     return res;
 };
+
+/*
+Time: O(n), Space: O(1), since alphabet contains max 26 letters.
+*/
