@@ -7,7 +7,6 @@ var isValidSudoku = function (board) {
       //   console.log(cell);
       if (cell === ".") continue;
       const boxNum = 3 * Math.floor(i / 3) + Math.floor(j / 3);
-      console.log(boxNum);
       const row = `row: ${i}, value ${cell}`;
       const col = `col: ${j}, value ${cell}`;
       const box = `box: ${boxNum}, value ${cell}`;
