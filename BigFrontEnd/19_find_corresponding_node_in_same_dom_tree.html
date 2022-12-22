@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Same DOM</title>
+  </head>
+  <body>
+    <script>
+      const dom1 = document.createElement("div");
+      dom1.innerHTML = `
+  <main>
+    <h1>Heading</h1>
+    <div>
+      <h2>test1</h2>
+      <p>test2 <em>emphasis</em></p>
+    </div>
+  </main>
+`;
+
+      const dom2 = document.createElement("main");
+      dom2.innerHTML = `
+  <article>
+    <h1>Heading2</h1>
+    <section>
+      <img src="img.png" alt="image" />
+      <h3>test5 <strong>strong</strong></h3>
+    </section>
+  </article>
+`;
+      function correspondingNode(tree1, tree2, node1) {
+        // Write your code here.
+        const stack1 = [tree1];
+        const stack2 = [tree2];
+        while (stack1.length > 0) {
+          const curr1 = stack1.pop();
+          const curr2 = stack2.pop();
+          if (curr1 === node1) {
+            return curr2;
+          }
+        //   console.log(curr1);
+          stack1.push(...curr1.children);
+          stack2.push(...curr2.children);
+        }
+      }
+      console.log(correspondingNode(dom1, dom2, dom1)); // <main>
+      console.log(correspondingNode(dom1, dom2, dom1.querySelector("h2"))); // <img src="img.png" alt="image" />
+      console.log(correspondingNode(dom1, dom2, dom1.querySelector("em")));// <strong>strong</strong>
+    </script>
+  </body>
+</html>
