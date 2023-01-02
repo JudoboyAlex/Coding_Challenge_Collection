@@ -145,3 +145,44 @@ We built a graph data structure in the algorithm, which would consume |E| + |V| 
 In addition, we use a container to keep track of the courses that have no prerequisite, and the size of the container would be bounded by |V|.
 As a result, the overall space complexity of the algorithm would be O(∣E∣+2⋅∣V∣)=O(∣E∣+∣V∣).
 */
+
+// Topological Sort Solution
+/**
+ * @param {number} numCourses
+ * @param {number[][]} prerequisites
+ * @return {boolean}
+ */
+var canFinish = function(numCourses, prerequisites) {
+    let map = new Map();
+    let visitSet = new Set();
+    
+    for(let i = 0; i < numCourses; i++){
+        map.set(i, []);
+    }
+    for( let [x, y] of prerequisites){
+        map.get(x).push(y)
+    }
+    
+    function dfs(course){
+        if(visitSet.has(course)) return false;
+        if(map.get(course).length === 0) return true;
+
+        visitSet.add(course);
+        console.log(visitSet);
+        for(p of map.get(course)){
+            if(!dfs(p)) return false;
+        }
+        visitSet.delete(course);
+        map.set(course, []);
+        return true;
+    }
+    
+    for(let i = 0; i < numCourses; i++){
+        if(!dfs(i)) return false;
+    }
+    
+    return true;
+};
+
+// What is Topological Sort?
+// Topological sort is nothing more than doing Depth First Search, and looking to see if there is any cycles. If a cycle exists, we cannot topologically sort something.
