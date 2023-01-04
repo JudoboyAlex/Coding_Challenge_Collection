@@ -19,3 +19,16 @@ Time complexity : O(∑k=1NP(N,k))
 
 Space complexity : O(N!) since one has to keep N! solutions.
 */
+
+  /**
+   * The goal is break down the problem by finding permutations in subarrays.
+   * So we will maintain a subarray of fixed elements and a subarray for 
+   * exploring permutations.
+   *
+   *                  [1], [2, 3]    [1, 2], [3]    [1, 2, 3]
+   * [], [1, 2, 3] -> [2], [1, 3] -> [1, 3], [2] -> [1, 3, 2]
+   *                  [3], [1, 2]    [2, 1], [1]    [2, 1, 3]
+   *                                 [2, 3], [1]    [2, 3, 1]
+   *                                 [3, 1], [2]    [3, 1, 2]
+   *                                 [3, 2], [1]    [3, 2, 1]                                 
+   */
