@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Name</title>
+</head>
+<body>
+<div class="foo bar baz">
+    <span class="bar baz">Span</span>
+    <p class="foo baz">Paragraph</p>
+    <div class="foo bar"></div>
+</div>
+
+<script>
+function isSubset(a, b) {
+  return Array.from(a).every((value) => b.contains(value));
+}
+
+/**
+ * @param {Element} element
+ * @param {string} classNames
+ * @return {Array<Element>}
+ */
+function getElementsByClassName(rootElement, classNames) {
+  const elements = [];
+  const classNamesSet = new Set(classNames.trim().split(/\s+/));
+
+  function traverse(element) {
+    if (element == null) {
+      return;
+    }
+    console.log(element.tagName);
+    if (isSubset(classNamesSet, element.classList)) {
+      elements.push(element);
+    }
+
+    for (let i = 0; i < (element.children || []).length; i++) {
+      traverse(element.children[i]);
+    }
+  }
+
+  for (let i = 0; i < (rootElement.children || []).length; i++) {
+    traverse(rootElement.children[i]);
+  }
+
+  return elements;
+}
+
+  console.log(getElementsByClassName(document.body, 'foo bar'));
+  // [div.foo.bar.baz, div.foo.bar] <-- This is an array of elements.
+
+</script>
+</body>
+</html>
