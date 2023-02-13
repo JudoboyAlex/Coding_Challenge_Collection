@@ -47,7 +47,7 @@
   return count === numCourses;
 };
 
-// Topological Sort
+// Topological Sort with indegree
 var canFinish = function (numCourses, prerequisites) {
   let order = [];
   const queue = [];

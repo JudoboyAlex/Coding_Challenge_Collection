@@ -82,3 +82,54 @@ const dfs = (adjList, current, visited) => {
 
 // Time complexity: O(E+V)
 // Space complexity: O(E+V)
+
+// DFS Solution
+var countComponents = function (n, edges) {
+  const visited = new Set();
+  let count = 0;
+
+  // build adjacency list
+  const adj = {};
+  for (let i = 0; i < n; i++) {
+    adj[i] = [];
+  }
+  for (const [n1, n2] of edges) {
+    adj[n1].push(n2.toString());
+    adj[n2].push(n1.toString());
+  }
+
+  // dfs, keep track of visited nodes in set
+  function dfs(val) {
+    if (visited.has(val)) return;
+    visited.add(val);
+    for (const i of adj[val]) {
+      dfs(i);
+    }
+  }
+  console.log(adj);
+  // perform dfs on each node (not visited), since some may be islands
+  for (const val in adj) {
+    if (!visited.has(val)) {
+      dfs(val);
+      count++;
+    }
+  }
+
+  return count;
+};
+
+/*
+Complexity Analysis
+
+Here E = Number of edges, V = Number of vertices.
+
+Time complexity: O(E+V).
+
+Building the adjacency list will take O(E) operations, as we iterate over the list of edges once, and insert each edge into two lists.
+
+During the DFS traversal, each vertex will only be visited once. This is because we mark each vertex as visited as soon as we see it, and then we only visit vertices that are not marked as visited. In addition, when we iterate over the edge list of each vertex, we look at each edge once. This has a total cost of O(E+V).
+
+Space complexity: O(E+V).
+
+Building the adjacency list will take O(E) space. To keep track of visited vertices, an array of size O(V) is required. Also, the run-time stack for DFS will use O(V) space.
+*/
