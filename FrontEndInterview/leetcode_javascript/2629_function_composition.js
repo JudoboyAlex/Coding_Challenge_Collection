@@ -52,3 +52,24 @@ const badCompose = function(functions) {
 
 const badComposedFn = badCompose([obj.increment, obj.double]);
 console.log(badComposedFn(1));  // This will return NaN, because `this` is not `obj` inside `increment` and `double`
+
+// Good example preserving this
+const obj2 = {
+  value: 1,
+  increment: function() { this.value++; return this.value; },
+  double: function() { this.value *= 2; return this.value; },
+};
+
+// Composing the methods while preserving `this`
+const goodCompose = function(functions, context) {
+  return function(x) {
+    let result = x;
+    for (let i = functions.length - 1; i >= 0; i--) {
+      result = functions[i].call(context, result);
+    }
+    return result;
+  };
+};
+
+const goodComposedFn = goodCompose([obj2.increment, obj2.double], obj2);
+console.log(goodComposedFn(1));  // This works as expected, because `this` is `obj` inside `increment` and `double`
